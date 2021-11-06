@@ -211,7 +211,7 @@ class Map( object ):
 
 	def cells( self ):
 		cells = []
-		for row in range( self.rows + self.cols / 2 ):
+		for row in range( int(self.rows + self.cols / 2) ):
 			cells.extend( 
 				[( row, col ) for col in range( 1 + 2 * row ) ]
 			)

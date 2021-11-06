@@ -66,7 +66,7 @@ class Render( pygame.Surface ):
 		self.fill( color )
 
 	# Identify cell
-	def get_cell( self, ( x, y ) ):
+	def get_cell( self, x , y):
 		"""
 		Identify the cell clicked in terms of row and column
 		"""
@@ -168,7 +168,7 @@ class RenderFog( Render ):
 
 		for cell in self.map.cells():
 			row, col = cell
-			surface = self.get_cell( cell )
+			surface = self.get_cell( row, col )
 
 			# Calculate the position of the cell
 			top = row * height - offset * col
@@ -187,7 +187,7 @@ def trim_cell( surface ):
 
 
 if __name__ == '__main__':
-	from .map import Map, MapUnit
+	from hex_map import Map, MapUnit
 	import sys
 
 	class Unit( MapUnit ):
@@ -196,7 +196,7 @@ if __name__ == '__main__':
 			radius = surface.get_width() / 2
 			pygame.draw.circle( surface, self.color, ( radius, int( SQRT3 / 2 * radius ) ), int( radius - radius * .3 ) )
 
-	m = Map( ( 5, 5 ) )
+	m = Map(5, 5)
 
 	grid = RenderGrid( m, radius=32 )
 	units = RenderUnits( m, radius=32 )
@@ -230,7 +230,7 @@ if __name__ == '__main__':
 					pygame.quit()
 					sys.exit()
 				if event.type == MOUSEBUTTONDOWN:
-					print( units.get_cell( event.pos ) )
+					print( units.get_cell( event.pos[0], event.pos[1]) )
 
 			window.fill( pygame.Color( 'white' ) )
 			grid.draw()
