@@ -1,4 +1,6 @@
 import sys, pygame
+import map.hex_map as map
+m = map.Map(5,5)
 pygame.init()
 
 size = width, height = 640, 480
